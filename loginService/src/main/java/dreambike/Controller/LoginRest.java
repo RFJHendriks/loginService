@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api/")
+@RequestMapping()
 public class LoginRest {
 	@GetMapping("/login")
 	public Map<String,Object> login(@RequestParam String username, @RequestParam String password) throws IOException {
