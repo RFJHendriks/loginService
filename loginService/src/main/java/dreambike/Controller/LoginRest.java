@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,12 +21,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping()
 public class LoginRest {
+	@GetMapping("/connect")
+	public boolean connect() throws IOException {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();  
+		System.out.println(dtf.format(now) + " Connection tested");
+		return true;
+	}
+	
 	@GetMapping("/login")
 	public Map<String,Object> login(@RequestParam String username, @RequestParam String password) throws IOException {
 		final String uri = "http://localhost:8080/auth/realms/DreamBikeKeycloak/protocol/openid-connect/token/";
-		String clientSecret = "e729b79d-4280-4ce4-bcf3-4fd6321bc491";
-		String body = "grant_type=password&username="+username+"&password="+password+"&client_id=login-app&client_secret="+clientSecret+"&scope=openid";
+		String clientSecret = "5dda877b-7b0f-4f5a-bd43-a1ea97719dce";
+		String body = "grant_type=password&username="+username+"&password="+password+"&client_id=loginapp&client_secret="+clientSecret+"&scope=openid";
 		URL url = new URL(uri);
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+		LocalDateTime now = LocalDateTime.now();  
+		System.out.println(dtf.format(now) + " login received. User: " + username);
 		HttpURLConnection con = (HttpURLConnection)url.openConnection();
 		con.setRequestMethod("POST");
 		con.setDoOutput(true);
@@ -46,6 +59,7 @@ public class LoginRest {
 	        	testJson.put(temp, jsonObject.get(temp).toString());;
         }
         con.disconnect();
+        System.out.println(testJson.toString());
 		return testJson;			
 	}
 }

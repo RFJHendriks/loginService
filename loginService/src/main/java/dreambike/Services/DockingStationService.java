@@ -1,13 +1,11 @@
 package dreambike.Services;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dreambike.Classes.DockingStation;
-import dreambike.Classes.DockingStations;
 import dreambike.RestClient.DockingStationClient;
 
 @Service

@@ -4,17 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import dreambike.Classes.DockingStation;
-import dreambike.Classes.DockingStations;
 
 @Component
 public class DockingStationClient {
@@ -23,7 +19,7 @@ public class DockingStationClient {
 	public String getAll() throws IOException {
 		String uri = "http://localhost:45702/api/getAll";
 		URL url = new URL(uri);
-		String body = "id=1";
+//		String body = "id=1";
 		HttpURLConnection con = (HttpURLConnection)url.openConnection();
 		con.setRequestMethod("GET");
 		BufferedReader reader = new BufferedReader(new InputStreamReader((con.getInputStream()), StandardCharsets.UTF_8));
