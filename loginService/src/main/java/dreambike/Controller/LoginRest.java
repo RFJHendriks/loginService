@@ -31,8 +31,8 @@ public class LoginRest {
 	
 	@GetMapping("/login")
 	public Map<String,Object> login(@RequestParam String username, @RequestParam String password) throws IOException {
-		final String uri = "http://localhost:8080/auth/realms/DreamBikeKeycloak/protocol/openid-connect/token/";
-		String clientSecret = "5dda877b-7b0f-4f5a-bd43-a1ea97719dce";
+		final String uri = "http://85.146.20.136:8080/auth/realms/DreamBikeKeycloak/protocol/openid-connect/token/";
+		String clientSecret = "e729b79d-4280-4ce4-bcf3-4fd6321bc491";
 		String body = "grant_type=password&username="+username+"&password="+password+"&client_id=loginapp&client_secret="+clientSecret+"&scope=openid";
 		URL url = new URL(uri);
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
@@ -43,12 +43,6 @@ public class LoginRest {
 		con.setDoOutput(true);
 		con.getOutputStream().write(body.getBytes("UTF-8"));
 		BufferedReader reader = new BufferedReader(new InputStreamReader((con.getInputStream()), StandardCharsets.UTF_8));
-//		JsonParser jsonParser = new JsonParser();
-//		JsonObject jsonObject = (JsonObject)jsonParser.parse(new InputStreamReader(con.getInputStream(), "UTF-8"));
-//		System.out.println(jsonObject);
-//		JsonReader readerJson = new JsonReader(new InputStreamReader((con.getInputStream()), StandardCharsets.UTF_8));
-//		System.out.println(readerJson.toString());
-//		JsonArray jsonArray = readerJson.readArray();
         String json = reader.readLine();
         reader.close();
         JSONObject jsonObject = new JSONObject(json);	
